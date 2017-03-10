@@ -7,6 +7,7 @@ class Logp < Formula
   depends_on "openssl"
 
   def install
+    system "git", "submodule", "update", "--init"
     system "make", "XCXXFLAGS=-I/usr/local/opt/openssl/include", "XLDFLAGS=-L/usr/local/opt/openssl/lib", "-j4"
     bin.install "logp"
   end
