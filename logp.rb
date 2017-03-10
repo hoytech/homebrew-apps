@@ -6,6 +6,8 @@ class Logp < Formula
   depends_on "openssl"
 
   def install
+    ## FIXME: This touch is a hack: the makefile looks for this file to see if the version has changed
+    system "touch", ".git/refs/heads/master"
     system "git", "submodule", "update", "--init"
     system "make", "XCXXFLAGS=-I/usr/local/opt/openssl/include", "XLDFLAGS=-L/usr/local/opt/openssl/lib", "-j4"
     bin.install "logp"
